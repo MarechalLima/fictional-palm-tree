@@ -10,7 +10,7 @@ def main():
     if choice == 1:
         questOne()
     elif choice == 2:
-        print("fodase")
+        questTwo()
     elif choice == 3:
         print("fodase")
     elif choice == 4:
@@ -42,9 +42,13 @@ def questTwo():
     plt.xlabel("Number of features")
 
     plt.xticks([0, (2*10**4), (4*10**4),(6*10**4)])
-    # plt.box(False)
-    plt.box(y=False)
+    plt.box(False)
     plt.tight_layout()
     plt.show()
+    plt.savefig("Quest2.png")
 
-questTwo()
+def questThree():
+    data = pd.read_csv("data/feature_counts.txt", delim_whitespace=True)
+
+
+questThree()
