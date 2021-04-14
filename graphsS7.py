@@ -28,29 +28,34 @@ def main():
 
 ## Questão 1
 def questOne():
-    data = pd.read_csv("data/weight_chart.txt", usecols=['Age', 'Weight'], delim_whitespace=True)
+    data = pd.read_csv("data/weight_chart.txt", usecols=['Age', 'Weight'], delim_whitespace=True) # Lendo os dados do arquivo
 
     data.plot.line(x='Age', y='Weight', marker='o', markerfacecolor='white', color="#000000", legend=False)
-    plt.xlabel("Age (months)")
-    plt.ylabel("Weight (kg)")
-    plt.title("The relationship between age and weight in a growing infant", fontweight="bold")
 
+    #Alterando o limite do eixo y entre 1 e 11
     plt.ylim(1,11)
-    plt.savefig("Quest1.png")
-    plt.show()
+
+    plt.xlabel("Age (months)") # Texto do eixo x
+    plt.ylabel("Weight (kg)") # Texto do eixo y
+    plt.title("The relationship between age and weight in a growing infant", fontweight="bold") # Titulo do gráfico
+    plt.savefig("Quest1.png") # Salvando a figura
+    plt.show() # Exibindo o gráfico
 
 ## Questão 2
 def questTwo():
     data = pd.read_csv("data/feature_counts.txt", delim_whitespace=True)
 
+    # Separando eixo da figura para alterar as bordas do eixo cartesiano
     fig, ax = plt.subplots()
     ax.spines["right"].set_visible(False)
     ax.spines["top"].set_visible(False)
 
     data.plot.barh(x='Feature', y='Count', legend=False, color="lightgray", edgecolor='black', ax=ax)
-    plt.xlabel("Number of features")
-
+    
+    # Alterando os pontos exibidos no gráfico em X
     plt.xticks([0, (2*10**4), (4*10**4),(6*10**4)])
+    
+    plt.xlabel("Number of features")
     plt.tight_layout()
     plt.savefig("Quest2.png")
     plt.show()
@@ -69,8 +74,10 @@ def questThree():
     ax.spines["right"].set_visible(False)
     ax.spines["top"].set_visible(False)
 
-    plt.xlim(-4,8)
     plt.hist(data, bins=100, edgecolor='black', color="lightgray")
+
+    # Limitando o gráfico no eixo x entre -4 e 8
+    plt.xlim(-4,8)
 
     plt.title("Mixed distribution histogram", fontweight="bold")
     plt.ylabel("Frequency")
@@ -94,7 +101,10 @@ def questFour():
 
     data.plot.bar(x='Sample', y='Count', legend=False, color=colors, ax=ax)
 
-    plt.yticks([0,5,10,15])
+    # Alterando os pontos exibidos no gráfico em Y
+    plt.yticks([0, 5, 10, 15])
+
+    # Alterando a rotação e o tamanho dos pontos exibidos no gráfico em X
     plt.xticks(rotation=0, fontsize=8)
 
     plt.xlabel("")
@@ -127,8 +137,8 @@ def questFive():
 
     data.plot.scatter(x='Condition1', y='Condition2', c=colorArray, s=4)
 
-    plt.yticks([0,5,10])
-    plt.xticks([0,5,10])
+    plt.yticks([0, 5, 10])
+    plt.xticks([0, 5, 10])
     plt.savefig("Quest5.png")
     plt.show()
 
@@ -136,10 +146,12 @@ def questFive():
 def questSix():
     data = pd.read_csv("data/chromosome_position_data.txt", delim_whitespace=True)
 
+    # Defininfo ax subsequentes para serem plotados no mesmo plano
     ax = data.plot.line(x='Position', y='Mut1', color="red")
     data.plot.line(x='Position', y='Mut2', ax=ax, color="blue")
     data.plot.line(x='Position', y='WT', ax=ax, color="limegreen")
 
+    # Alterando simbolo das legendas
     legend_elements = [
         Patch(facecolor="red", edgecolor="black", label="Mut1"),
         Patch(facecolor="blue", edgecolor="black", label="Mut2"),
@@ -149,7 +161,7 @@ def questSix():
 
     plt.xlabel("Position within chromosome")
     plt.ylabel("Value")
-    plt.gca().get_xaxis().get_major_formatter().set_scientific(False)
+    plt.gca().get_xaxis().get_major_formatter().set_scientific(False) # Desabilitando notação científica
     plt.savefig("Quest6.png")
     plt.show()
 
@@ -163,6 +175,7 @@ def questSeven():
         x=data['Brainweight'], y=data['Bodyweight'], xerr=data['Brainweight.SEM'],
         yerr=data['Bodyweight.SEM'], marker="D", markersize=3 , color="black", ls='none', capsize=5
     )
+    # Adicionando texto embaixo do ponto
     for i, txt in enumerate(data['Species']):
         plt.annotate(txt, (data['Brainweight'][i], data['Bodyweight'][i]-0.25), size=5, ha='center')
 
