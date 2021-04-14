@@ -184,4 +184,5 @@ def questSeven():
     plt.savefig("Quest7.png")
     plt.show()
 
+# Chamando função principal (menu)
 main()
