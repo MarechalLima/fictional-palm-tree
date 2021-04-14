@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-from numpy.core.fromnumeric import size
 import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib.patches import Patch
