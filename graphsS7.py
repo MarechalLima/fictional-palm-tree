@@ -2,6 +2,7 @@
 from numpy.core.fromnumeric import size
 import pandas as pd
 import matplotlib.pyplot as plt
+from matplotlib.patches import Patch
 import numpy as np
 
 # Menu
@@ -20,7 +21,7 @@ def main():
         elif choice == 5:
             questFive()
         elif choice == 6:
-            print("fodase")
+            questSix()
         elif choice == 7:
             print("fodase")
         elif choice == 0:
@@ -110,6 +111,7 @@ def colorScatter(stateArray):
     output = []
 
     for x in stateArray:
+        print(x)
         if x == "up":
             output.append("red")
         elif x == "down":
@@ -132,4 +134,30 @@ def questFive():
     plt.savefig("Quest5.png")
     plt.show()
 
-questFive()
+## Questão 6
+def questSix():
+    data = pd.read_csv("data/chromosome_position_data.txt", delim_whitespace=True)
+
+    ax = data.plot.line(x='Position', y='Mut1', color="red")
+    data.plot.line(x='Position', y='Mut2', ax=ax, color="blue")
+    data.plot.line(x='Position', y='WT', ax=ax, color="limegreen")
+
+    legend_elements = [
+        Patch(facecolor="red", edgecolor="black", label="Mut1"),
+        Patch(facecolor="blue", edgecolor="black", label="Mut2"),
+        Patch(facecolor="limegreen", edgecolor="black", label="WT"),
+    ]
+    plt.legend(handles=legend_elements, loc="upper left")
+
+    plt.xlabel("Position within chromosome")
+    plt.ylabel("Value")
+    plt.gca().get_xaxis().get_major_formatter().set_scientific(False)
+    plt.savefig("Quest6.png")
+    plt.show()
+
+## Questão 7
+def questSeven():
+    data = pd.read_csv("data/brain_bodyweight.txt", delim_whitespace=True)
+    print(data.head())
+
+questSeven()
