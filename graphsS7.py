@@ -23,7 +23,7 @@ def main():
         elif choice == 6:
             questSix()
         elif choice == 7:
-            print("fodase")
+            questSeven()
         elif choice == 0:
             break
 
@@ -155,9 +155,22 @@ def questSix():
     plt.savefig("Quest6.png")
     plt.show()
 
+    del ax
+
 ## Questão 7
 def questSeven():
     data = pd.read_csv("data/brain_bodyweight.txt", delim_whitespace=True)
-    print(data.head())
 
-questSeven()
+    plt.errorbar(
+        x=data['Brainweight'], y=data['Bodyweight'], xerr=data['Brainweight.SEM'],
+        yerr=data['Bodyweight.SEM'], marker="D", markersize=3 , color="black", ls='none', capsize=5
+    )
+    for i, txt in enumerate(data['Species']):
+        plt.annotate(txt, (data['Brainweight'][i], data['Bodyweight'][i]-0.25), size=5, ha='center')
+
+    plt.xlabel("Brain weight")
+    plt.ylabel("Body weight")
+    plt.savefig("Quest7.png")
+    plt.show()
+
+main()
