@@ -111,7 +111,6 @@ def colorScatter(stateArray):
     output = []
 
     for x in stateArray:
-        print(x)
         if x == "up":
             output.append("red")
         elif x == "down":
