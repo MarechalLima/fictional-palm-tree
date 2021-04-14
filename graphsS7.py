@@ -18,7 +18,7 @@ def main():
         elif choice == 4:
             questFour()
         elif choice == 5:
-            print("fodase")
+            questFive()
         elif choice == 6:
             print("fodase")
         elif choice == 7:
@@ -105,6 +105,31 @@ def questFour():
     del fig
     del ax
 
-# questFour()
+## Questão 5
+def colorScatter(stateArray):
+    output = []
 
-main()
+    for x in stateArray:
+        if x == "up":
+            output.append("red")
+        elif x == "down":
+            output.append("blue")
+        else:
+            output.append("gray")
+    
+    return output
+
+def questFive():
+    data = pd.read_csv("data/up_down_expression.txt", delim_whitespace=True)
+    
+    ## Definindo a cor do ponto baseado no 'State'
+    colorArray = colorScatter(data['State'])
+
+    data.plot.scatter(x='Condition1', y='Condition2', c=colorArray, s=4)
+
+    plt.yticks([0,5,10])
+    plt.xticks([0,5,10])
+    plt.savefig("Quest5.png")
+    plt.show()
+
+questFive()
